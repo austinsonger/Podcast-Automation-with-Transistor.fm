@@ -11,6 +11,7 @@ You can find the podcast that this automation is for at the following: [Apple Po
 
 ## Future To Do
 - [ ] Combine the scripts to operate as a modular python application
+- [ ] Fix the Text Placement on Podcast Episode Cover
 
 
 ## Supreme Court of the United States Podcast Episode Generator

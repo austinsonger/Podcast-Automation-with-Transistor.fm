@@ -21,4 +21,4 @@ jobs:
         pip install pandas pillow  # Install the required Python packages
 
     - name: Run the script
-      run: python /src/podcast-cover.py  # Run the script
+      run: python src/podcast-cover.py  # Run the script

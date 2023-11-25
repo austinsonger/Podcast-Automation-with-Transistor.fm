@@ -1,3 +1,5 @@
+You can find the podcast that this automation is for at the following: [Apple Podcasts](https://podcasts.apple.com/us/podcast/supreme-court-of-the-united-states/id1483973915), [Spotify](https://open.spotify.com/show/2T4w6ZUmYAml4ilCpDGFX2), [Google Podcasts](https://podcasts.google.com/feed/aHR0cHM6Ly9mZWVkcy50cmFuc2lzdG9yLmZtL3N1cHJlbWUtY291cnQtb2YtdGhlLXVuaXRlZC1zdGF0ZXM), [Amazon Music Podcasts](https://music.amazon.com/podcasts/77ffa01b-3aa3-4498-916f-ccd640280dca/supreme-court-of-the-united-states),[YouTube](https://www.youtube.com/channel/UC02oIiNULwiiDxB0Aw1aySg),[Castro](https://castro.fm/itunes/1483973915),[GoodPod](https://goodpods.com/podcasts/supreme-court-of-the-united-states-248195) ,[Anghami](https://play.anghami.com/podcast/1029643374),[RadioPublic](https://radiopublic.com/supreme-court-of-the-united-state-GK2bbz),[CastBox](https://castbox.fm/channel/3166723?utm_campaign=ex_share_ch&utm_medium=exlink&country=us) ,[Pandora](https://www.pandora.com/podcast/supreme-court-of-the-united-states/PC:48735),[PodcastAddict](https://podcastaddict.com/podcast/supreme-court-of-the-united-states/3071811),[Player.fm](https://player.fm/series/supreme-court-of-the-united-states),[TuneIn](https://tunein.com/podcasts/Podcasts/Supreme-Court-of-United-States-p1257992/),[iHeartRadio](https://www.iheart.com/podcast/269-supreme-court-of-the-unite-70629899/),[Deezer](https://www.deezer.com/us/show/1932832)
+
 #  Podcast Automation with Transistor.fm
 
 ## To Do
@@ -13,7 +15,7 @@
 
 ## Supreme Court of the United States Podcast Episode Generator
 
-![Apple Podcasts](https://podcasts.apple.com/us/podcast/supreme-court-of-the-united-states/id1483973915)
+
 
 Downloads audio from Supreme Court of the United States (SCOTUS) arguments and generate podcast covers for each episode. It includes a script to download SCOTUS Arguments audio, another to generate the podcast covers, and a GitHub Actions workflow to run the scripts manually. 
 

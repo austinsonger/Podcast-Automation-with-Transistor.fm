@@ -1,0 +1,27 @@
+name: Python 
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install requests
+
+    - name: Run Script
+      env:
+        TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
+      run: |
+        python /python/transistorfm-csv.py

@@ -22,4 +22,4 @@ jobs:
 
     - name: Run the script
       run: python podcast-cover.py  # Run the script
-      working-directory: ./src
+      working-directory: src

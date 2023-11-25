@@ -1,4 +1,4 @@
-name: Python 
+name: Create Draft Episodes in Transistor.fm 
 
 on:
   workflow_dispatch:

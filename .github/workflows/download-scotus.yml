@@ -1,4 +1,4 @@
-name: download-scotus
+name: Download New Audio from Recent Arguments
 
 on:
   workflow_dispatch:  

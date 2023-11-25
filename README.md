@@ -7,6 +7,9 @@
 - [X] Automating the Creation of Cover Image for Each Podcast Episode
 - [ ] Automating the Uploading of Cover Image & Audio into their Draft Episode in Transistor.fm
 
+## Future To Do
+- [ ] Combine the scripts to operate as a modular python application
+
 
 ## Supreme Court of the United States Podcast Episode Generator
 

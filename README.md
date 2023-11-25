@@ -29,7 +29,7 @@ Downloads audio from Supreme Court of the United States (SCOTUS) arguments and g
 ### Project Structure
 
 - `download-scotus.py`: Python script to download SCOTUS decision data.
-- `PodcastCover.py`: Python script to generate podcast covers from decision data.
+- `podcast-cover.py`: Python script to generate podcast covers from decision data.
 - `transistor-csv.py`: (Description of this script's purpose, based on your implementation.)
 - `scotus.csv`: CSV file containing data related to SCOTUS cases.
 - `Blank.png`: Template image used by `PodcastCover.py` to generate podcast covers.

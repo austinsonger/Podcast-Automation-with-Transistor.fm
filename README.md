@@ -27,6 +27,7 @@ To run these scripts, you'll need Python installed on your machine, along with t
 
 ```bash
 pip install pandas Pillow
+```
 
 ### Usage
 
@@ -70,6 +71,8 @@ Contributions to this project are welcome. Please open an issue or submit a pull
 
 ---
 
+```
 This project is not officially affiliated with the Supreme Court of the United States.
 ```
+
 

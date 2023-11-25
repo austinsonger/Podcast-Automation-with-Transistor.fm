@@ -35,13 +35,13 @@ csv_file = 'scotus.csv'
 data = pd.read_csv(csv_file)
 
 # Base directory for the year
-base_dir = '../2023'
+base_dir = '../2023/'
 
 # Path to your predefined graphic
-graphic_path = '/config/Blank.png'
+graphic_path = './config/Blank.png'
 
 # Font settings
-font_path = 'MonaspaceArgon-Bold.otf'  # Update with the actual path to your font
+font_path = './config/MonaspaceArgon-Bold.otf'  # Update with the actual path to your font
 font_size = 100
 font = ImageFont.truetype(font_path, font_size)
 

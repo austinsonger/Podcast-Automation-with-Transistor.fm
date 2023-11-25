@@ -1,0 +1,24 @@
+name: Create Episode Cover Images
+
+on:
+  workflow_dispatch:  # Allows the workflow to be triggered manually
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest  # Specifies the runner environment
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3  # Checks out your repository
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'  # Specify the Python version
+
+    - name: Install dependencies
+      run: |
+        pip install pandas pillow  # Install the required Python packages
+
+    - name: Run the script
+      run: python podcast-cover.py  # Run the script

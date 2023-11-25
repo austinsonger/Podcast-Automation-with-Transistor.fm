@@ -13,7 +13,10 @@
 
 ## Supreme Court of the United States Podcast Episode Generator
 
+![Apple Podcasts](https://podcasts.apple.com/us/podcast/supreme-court-of-the-united-states/id1483973915)
+
 Downloads audio from Supreme Court of the United States (SCOTUS) arguments and generate podcast covers for each episode. It includes a script to download SCOTUS Arguments audio, another to generate the podcast covers, and a GitHub Actions workflow to run the scripts manually. 
+
 
 ### Project Structure
 

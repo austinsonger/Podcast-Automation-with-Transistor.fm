@@ -57,12 +57,12 @@ def create_draft_episodes_from_csv(csv_file_path, show_id):
 
 # Transistor.fm API endpoint and authorization
 api_url = "https://api.transistor.fm/v1/episodes"
-api_key = "[API_KEY]"  # Replace with your actual API key
-show_id = "[SHOW_ID]"  # "#####" Replace with your actual Show ID
+transistor_api_key = os.getenv('TRANSISTOR_API_KEY')  # Accessing the API key from environment variable
+show_id = "12890"  # Replace with your actual Show ID
 
 # Headers for the API request
 headers = {
-    "x-api-key": api_key
+    "x-api-key": transistor_api_key
 }
 
 # Function to create a draft episode in Transistor

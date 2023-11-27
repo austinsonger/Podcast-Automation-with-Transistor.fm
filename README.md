@@ -62,7 +62,7 @@ Make sure to update the `scotus.csv` file path in the script if it's different f
 To generate podcast covers:
 
 ```bash
-python PodcastCover.py
+python podcast-cover.py
 ```
 
 Ensure `Blank.png` and the font file are in the correct paths as the script expects.

@@ -86,8 +86,8 @@ Contributions to this project are welcome. Please open an issue or submit a pull
 
 ---
 
-```
-This project is not officially affiliated with the Supreme Court of the United States.
-```
+
+# This project is not officially affiliated with the Supreme Court of the United States.
+
 
 

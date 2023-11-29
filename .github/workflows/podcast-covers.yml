@@ -31,6 +31,6 @@ jobs:
           git config --global user.name 'Austin Songer'
           git config --global user.email 'a.songer@protonmail.com'
           git add . 
-          git commit -m "Add new audio files"  # Create a commit
+          git commit -m "Add New Podcast Covers"  # Create a commit
           git remote set-url origin https://austinsonger:${{ secrets.GH_PAT }}@github.com/austinsonger/Podcast-Automation-with-Transistor.fm.git
           git push  # Push the commit to the repository

@@ -23,3 +23,11 @@ jobs:
     - name: Run the script
       run: python podcast-cover.py  # Run the script
       working-directory: src
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name 'Austin Songer'
+        git config --global user.email 'avsonger@protonmail.com'
+        git add . 
+        git commit -m "Add new audio files"  # Create a commit
+        git push  # Push the commit to the repository

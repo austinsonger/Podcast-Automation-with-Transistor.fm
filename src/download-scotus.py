@@ -20,7 +20,7 @@ for index, row in scotus_df.iterrows():
     os.makedirs(case_dir, exist_ok=True)
 
     # Generate the curl command
-    curl_command = f"curl https://www.supremecourt.gov/media/audio/mp3files/{case_id}.mp3 --output {case_dir}/{case_id}.mp3"
+    curl_command = f"curl https://www.supremecourt.gov/media/audio/mp3files/{case_id}.mp3 --output {case_dir}/audio/{case_id}.mp3"
 
     # Execute the curl command
     subprocess.run(curl_command, shell=True, check=True)

@@ -3,6 +3,7 @@ name: Download New Audio from Recent Arguments
 on:
   workflow_dispatch:
 
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
@@ -24,11 +25,10 @@ jobs:
       run: python download-scotus.py
       working-directory: src
 
-    # Assuming your script saves the audio files in a directory named 'audio'
     - name: Commit and Push changes
       run: |
         git config --global user.name 'Austin Songer'
-        git config --global user.email 'avsonger@protonmail.com'
+        git config --global user.email 'a.songer@protonmail.com'
         git add . 
         git commit -m "Add new audio files"  # Create a commit
         git push  # Push the commit to the repository

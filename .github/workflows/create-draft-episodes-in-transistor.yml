@@ -24,4 +24,5 @@ jobs:
       env:
         TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
       run: |
-        python /python/transistorfm-csv.py
+        python transistorfm-csv.py
+        working-directory: src

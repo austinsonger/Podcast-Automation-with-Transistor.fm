@@ -3,7 +3,7 @@ import os
 import subprocess
 
 # Load the CSV file
-file_path = 'scotus.csv'  # Replace with your actual file path
+file_path = '/config/scotus.csv'  # Replace with your actual file path
 scotus_df = pd.read_csv(file_path)
 
 # Base directory for the year

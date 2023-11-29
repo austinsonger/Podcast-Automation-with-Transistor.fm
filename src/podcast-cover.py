@@ -55,24 +55,28 @@ for index, row in data.iterrows():
     # Create directory for the case if it doesn't exist
     os.makedirs(case_dir, exist_ok=True)
 
-    # Open the image
-    img = Image.open(graphic_path)
-    draw = ImageDraw.Draw(img)
-
-    # Coordinates for text insertion
-    x = 500
-    y = 1500
-
-    # Wrap text using textwrap (fixed number of characters per line)
-    text = row['Title']
-    wrapped_text = textwrap.fill(text, width=30)  # Adjust width as needed
-    lines = wrapped_text.split('\n')
-
-    # Draw each line of the text
-    for line in lines:
-        draw.text((x, y), line, fill="white", font=font)
-        y += font_size + 10  # Adjust line spacing
-
-    # Save the new image in the created directory
+    # Define the new image path
     new_image_path = os.path.join(case_dir, f"{case_id}_cover.png")
-    img.save(new_image_path)
+
+    # Check if the image already exists
+    if not os.path.exists(new_image_path):
+        # Open the image
+        img = Image.open(graphic_path)
+        draw = ImageDraw.Draw(img)
+
+        # Coordinates for text insertion
+        x = 500
+        y = 1500
+
+        # Wrap text using textwrap (fixed number of characters per line)
+        text = row['Title']
+        wrapped_text = textwrap.fill(text, width=30)  # Adjust width as needed
+        lines = wrapped_text.split('\n')
+
+        # Draw each line of the text
+        for line in lines:
+            draw.text((x, y), line, fill="white", font=font)
+            y += font_size + 10  # Adjust line spacing
+
+        # Save the new image in the created directory
+        img.save(new_image_path)

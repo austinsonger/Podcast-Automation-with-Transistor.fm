@@ -55,9 +55,12 @@ for index, row in data.iterrows():
     # Create directory for the case if it doesn't exist
     os.makedirs(case_dir, exist_ok=True)
 
-    # Define the new image path
-    new_image_path = os.path.join(case_dir, f"{case_id}_cover.png")
+    # Directory for images
+    images_dir = os.path.join(case_dir, 'images')
+    os.makedirs(images_dir, exist_ok=True)  # Create 'images' subdirectory
 
+    # Define the new image path in 'images' subdirectory
+    new_image_path = os.path.join(images_dir, f"{case_id}_cover.png")
     # Check if the image already exists
     if not os.path.exists(new_image_path):
         # Open the image

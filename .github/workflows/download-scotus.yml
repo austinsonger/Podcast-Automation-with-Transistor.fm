@@ -22,6 +22,7 @@ jobs:
 
     - name: Run the script
       run: python download-scotus.py
+      working-directory: src
 
     # Assuming your script saves the audio files in a directory named 'audio'
     - name: Commit and Push changes

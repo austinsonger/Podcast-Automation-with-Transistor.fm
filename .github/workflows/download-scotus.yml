@@ -9,26 +9,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v3
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT }}  # Use the PAT for authentication
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Specify the Python version
 
-    - name: Install dependencies
-      run: |
-        pip install pandas
+      - name: Install dependencies
+        run: |
+          pip install pandas
 
-    - name: Run the script
-      run: python download-scotus.py
-      working-directory: src
+      - name: Run the script
+        run: python download-scotus.py
+        working-directory: src
 
-    - name: Commit and Push changes
-      run: |
-        git config --global user.name 'Austin Songer'
-        git config --global user.email 'a.songer@protonmail.com'
-        git add . 
-        git commit -m "Add new audio files"  # Create a commit
-        git push  # Push the commit to the repository
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name 'Austin Songer'
+          git config --global user.email 'a.songer@protonmail.com'
+          git add . 
+          git commit -m "Add new audio files"  # Create a commit
+          git remote set-url origin https://austinsonger:${{ secrets.GH_PAT }}@github.com/austinsonger/Podcast-Automation-with-Transistor.fm.git
+          git push  # Push the commit to the repository

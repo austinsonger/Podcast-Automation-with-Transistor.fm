@@ -31,7 +31,7 @@ import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
 # Load CSV file
-csv_file = 'scotus.csv'
+csv_file = './config/scotus.csv'
 data = pd.read_csv(csv_file)
 
 # Base directory for the year

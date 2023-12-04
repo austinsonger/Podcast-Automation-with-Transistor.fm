@@ -23,5 +23,12 @@ for index, row in scotus_df.iterrows():
     # Generate the curl command
     curl_command = f"curl https://www.supremecourt.gov/media/audio/mp3files/{case_id}.mp3 --output {case_dir}/audio/{case_id}.mp3"
 
-    # Execute the curl command
-    subprocess.run(curl_command, shell=True, check=True)
+    # Check if the file already exists
+    file_path = os.path.join(audio_dir, f'{case_id}.mp3')
+    if not os.path.exists(file_path):
+        # File doesn't exist, execute the curl command
+        subprocess.run(curl_command, shell=True, check=True)
+    else:
+        # File already exists, skip downloading
+        print(f'Skipping download, file already exists: {file_path}')
+        

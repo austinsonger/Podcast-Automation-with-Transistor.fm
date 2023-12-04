@@ -12,7 +12,6 @@ You can find the podcast that this automation is for at the following: [Apple Po
 - [X] Automating the Downloading of Supreme Court Cases
 - [X] Automating the Creation of Cover Image for Each Podcast Episode
 - [ ] Automating the Uploading of Cover Image & Audio into their Draft Episode in Transistor.fm
-- [ ] Automating the publishing the episode based on the arugment date
 - [ ] Automating the transcribing of audio
 
 ## Future To Do

@@ -12,11 +12,14 @@ def transcribe_audio(file_path):
         return f"Error transcribing file {file_path}: {e}"
 
 def main():
-    csv_file = './config/scotus.csv'  
+    csv_file = './config/scotus.csv'  # Replace with your CSV file path
+    base_dir = '../2023/'  # Adjust based on the download-scotus.py script
+
     df = pd.read_csv(csv_file)
 
     for index, row in df.iterrows():
-        audio_file_path = row['AudioFilePath']  
+        case_id = row['Case ID'].strip()  # Replace 'Case ID' with the actual column name
+        audio_file_path = os.path.join(base_dir, case_id, 'audio', f'{case_id}.mp3')
         transcription = transcribe_audio(audio_file_path)
         print(f"Transcription for {audio_file_path}:")
         print(transcription)

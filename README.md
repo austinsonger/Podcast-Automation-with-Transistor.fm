@@ -8,7 +8,7 @@ You can find the podcast that this automation is for at the following: [Apple Po
 
 ## To Do
 
-- [X] Automating the Creating of Draft Podcase Episodes in Transistor.fm
+- [X] Automating the Creating & Scheduling of Draft Podcast Episodes in Transistor.fm
 - [X] Automating the Downloading of Supreme Court Cases
 - [X] Automating the Creation of Cover Image for Each Podcast Episode
 - [ ] Automating the Uploading of Cover Image & Audio into their Draft Episode in Transistor.fm

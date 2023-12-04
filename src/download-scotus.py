@@ -8,7 +8,7 @@ scotus_df = pd.read_csv(file_path)
 
 # Base directory for the year
 # base_dir = '../2023/'
-base_dir = os.path.abspath('../2023/')
+base_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', '2023')
 
 # Iterate over each row to generate and execute the curl commands
 for index, row in scotus_df.iterrows():

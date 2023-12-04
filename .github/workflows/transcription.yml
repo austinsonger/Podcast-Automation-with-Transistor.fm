@@ -1,0 +1,26 @@
+name: Audio Transcription
+
+on:
+  workflow_dispatch:
+
+jobs:
+  transcribe-audio:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install pandas
+        pip install SpeechRecognition
+
+    - name: Run transcription script
+      run: python episode-transcription.py
+      working-directory: src

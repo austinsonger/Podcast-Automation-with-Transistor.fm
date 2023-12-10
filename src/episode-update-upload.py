@@ -94,22 +94,16 @@ def update_episode(episode_id, case_id, data):
         print(f"Dry run: Would update episode {episode_id} with data: {data}")
         print(f"Audio file to upload: {audio_file}")
         print(f"Image file to upload: {image_file}")
-        # Close file handles if opened
-        for file in files.values():
-            file[1].close()
         return {"message": "Dry run, no update made"}
 
     # Make the actual request if not in dry run mode
-    response = requests.put(url, headers=headers, data=payload, files=files)
-    for file in files.values():
-        file[1].close()
+    response = requests.patch(f"{TRANSISTOR_API_URL}/{episode_id}", headers=headers, json=payload)
 
     if response.status_code != 200:
-    print(f"Error updating episode: {response.status_code}")
-    print(f"Response: {response.text}")  # More detailed logging
+        print(f"Error updating episode: {response.status_code}")
+        print(f"Response: {response.text}")  # More detailed logging
 
-    return response.json()    
-
+    return response.json()   
 
 
 def process_csv(csv_path):

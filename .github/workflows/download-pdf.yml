@@ -21,7 +21,7 @@ jobs:
 
     - name: Download and Commit PDFs
       run: |
-        python download-pdf-transcription.py  # Replace with the name of your Python script
+        python download-pdf.py  # Replace with the name of your Python script
         working-directory: src
 
     - name: Commit and Push changes

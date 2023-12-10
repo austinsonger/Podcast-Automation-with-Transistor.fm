@@ -1,0 +1,15 @@
+[package]
+name = "scotus-image-generator"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+csv = "1.1"
+image = "0.24"
+textwrap = "0.11"
+rusttype = "0.9.3" # Add rusttype dependency
+imageproc = "0.23.0"
+
+[[bin]]
+name = "main"
+path = "src/episode-cover-image.rs" 

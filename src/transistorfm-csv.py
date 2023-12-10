@@ -37,6 +37,15 @@ This script automates the creation of podcast episode drafts by reading episode 
 import csv
 import requests
 
+
+# Constants
+csv_file_path = './config/scotus.csv'
+api_url = "https://api.transistor.fm/v1/episodes" # Transistor.fm API endpoint and authorization
+transistor_api_key = os.getenv('TRANSISTOR_API_KEY')  # Transistor.fm API endpoint and authorization
+show_id = "12890"  # Transistor.fm API endpoint and authorization
+
+
+
 # Function to parse the CSV file and create draft episodes
 def create_draft_episodes_from_csv(csv_file_path, show_id):
     episodes = []
@@ -55,10 +64,6 @@ def create_draft_episodes_from_csv(csv_file_path, show_id):
             episodes.append(episode)
     return episodes
 
-# Transistor.fm API endpoint and authorization
-api_url = "https://api.transistor.fm/v1/episodes"
-transistor_api_key = os.getenv('TRANSISTOR_API_KEY')  # Accessing the API key from environment variable
-show_id = "12890"  # Replace with your actual Show ID
 
 # Headers for the API request
 headers = {
@@ -80,6 +85,5 @@ def process_episodes(csv_file_path):
         else:
             print(f"Failed to create episode '{episode['episode[title]']}'. Status Code: {response.status_code}, Response: {response.json()}")
 
-# Example usage (replace with your actual values)
-csv_file_path = 'scotus.csv'  # Replace with the path to your CSV file
+
 process_episodes(csv_file_path)

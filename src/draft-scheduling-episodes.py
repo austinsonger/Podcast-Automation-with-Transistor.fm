@@ -17,48 +17,61 @@ IMAGES_PATH = '../2023/images/'
 # Headers for API requests
 headers = {"x-api-key": TRANSISTOR_API_KEY}
 
-def create_and_schedule_episode(title, description, audio_filename, cover_image_filename, argument_date):
-    cst_timezone = pytz.timezone('America/Chicago')
-    scheduled_time = datetime.strptime(argument_date, '%Y-%m-%d').replace(tzinfo=pytz.utc).astimezone(cst_timezone)
-    scheduled_time = scheduled_time.replace(hour=20, minute=0, second=0)  # 8 PM CST
+def extract_argument_date_from_title(title):
+    # Extract the argument date from the title, assuming it's in the format "[Arg: date]"
+    date_start = title.find("[Arg: ")
+    date_end = title.find("]", date_start)
+    if date_start != -1 and date_end != -1:
+        date_str = title[date_start + 6 : date_end].strip()
+        try:
+            argument_date = datetime.strptime(date_str, '%m.%d.%Y').strftime('%Y-%m-%d')
+            return argument_date
+        except ValueError:
+            pass
+    return None
 
-    data = {
-        'show_id': TRANSISTOR_SHOW_ID,
-        'title': title,
-        'description': description,
-        'status': 'draft',
-        'publish_at': scheduled_time.isoformat()
-    }
+def create_and_schedule_episode(title, summary):
+    argument_date = extract_argument_date_from_title(title)
 
-    # Create the episode
-    episode_response = requests.post(TRANSISTOR_API_URL, headers=headers, json=data)
-    if episode_response.status_code == 201:
-        episode_data = episode_response.json()
-        episode_id = episode_data['data']['id']
+    if argument_date is not None:
+        cst_timezone = pytz.timezone('America/Chicago')
+        scheduled_time = datetime.strptime(argument_date, '%Y-%m-%d').replace(tzinfo=pytz.utc).astimezone(cst_timezone)
+        scheduled_time = scheduled_time.replace(hour=20, minute=0, second=0)  # 8 PM CST
 
-        # Upload audio file
-        audio_file_path = os.path.join(AUDIO_PATH, audio_filename)
-        with open(audio_file_path, 'rb') as audio_file:
-            requests.post(f'{TRANSISTOR_API_URL}/{episode_id}/audio', headers=headers, files={'audio': audio_file})
+        data = {
+            'show_id': TRANSISTOR_SHOW_ID,
+            'title': title,
+            'description': summary,  # Use the 'Summary' column as the description
+            'status': 'draft',
+            'publish_at': scheduled_time.isoformat()
+        }
 
-        # Upload cover image
-        cover_image_path = os.path.join(IMAGES_PATH, cover_image_filename)
-        with open(cover_image_path, 'rb') as image_file:
-            requests.post(f'{TRANSISTOR_API_URL}/{episode_id}/images', headers=headers, files={'image': image_file})
-    else:
-        print(f'Error creating episode: {episode_response.status_code}')
+        # Create the episode
+        episode_response = requests.post(TRANSISTOR_API_URL, headers=headers, json=data)
+        if episode_response.status_code == 201:
+            episode_data = episode_response.json()
+            episode_id = episode_data['data']['id']
+
+            # Upload audio file (assuming it's located at the same path for all episodes)
+            audio_file_path = os.path.join(AUDIO_PATH, f'{episode_id}.mp3')
+            with open(audio_file_path, 'rb') as audio_file:
+                requests.post(f'{TRANSISTOR_API_URL}/{episode_id}/audio', headers=headers, files={'audio': audio_file})
+
+            # Upload cover image (assuming it's located at the same path for all episodes)
+            cover_image_path = os.path.join(IMAGES_PATH, f'{episode_id}.jpg')
+            with open(cover_image_path, 'rb') as image_file:
+                requests.post(f'{TRANSISTOR_API_URL}/{episode_id}/images', headers=headers, files={'image': image_file})
+        else:
+            print(f'Error creating episode: {episode_response.status_code}')
 
 def main():
     df = pd.read_csv(CSV_FILE_PATH)
 
     for index, row in df.iterrows():
-        title = row['title']
-        description = row['description']
-        audio_filename = row['audio_file_path']
-        cover_image_filename = row['cover_image_path']
-        argument_date = row['argument_date']
+        title = row['Title']
+        summary = row['Summary']
 
-        create_and_schedule_episode(title, description, audio_filename, cover_image_filename, argument_date)
+        create_and_schedule_episode(title, summary)
 
 if __name__ == "__main__":
     main()

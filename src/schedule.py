@@ -2,7 +2,7 @@ import csv
 import requests
 import os
 import re
-from datetime import datetime 
+from datetime import datetime, timedelta
 
 # Constants
 csv_file_path = './config/scotus.csv'
@@ -27,7 +27,10 @@ def create_draft_episodes_from_csv(csv_file_path, show_id):
                 argument_date_str = argument_date_match.group(1)
                 # Adjust the date format to match the input format (MM.DD.YYYY)
                 argument_date = datetime.strptime(argument_date_str, '%m.%d.%Y')
-                published_date = argument_date.strftime('%Y-%m-%dT20:00:00') + timezone_offset   # Format as ISO 8601 with time set to 8:00 PM
+                # Add one day to account for UTC time zone
+                argument_date += timedelta(days=1)
+                # Format as ISO 8601 for 2:00 AM UTC on the next day
+                published_date = argument_date.strftime('%Y-%m-%dT02:00Z')
             else:
                 published_date = None
 

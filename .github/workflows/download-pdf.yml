@@ -1,10 +1,7 @@
 name: Download PDFs and Commit to Repo
 
 on:
-  push:
-    branches:
-      - main  # Adjust the branch name if needed
-
+  workflow_dispatch:  # Allows the workflow to be triggered manually
 jobs:
   download-pdfs:
     runs-on: ubuntu-latest

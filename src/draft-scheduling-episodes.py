@@ -2,9 +2,10 @@ import pandas as pd
 import requests
 from datetime import datetime
 import pytz
+import os  # Ensure os is imported for os.getenv
 
 # Constants
-CSV_FILE_PATH = '/config/scotus.csv'
+CSV_FILE_PATH = './config/scotus.csv'
 TRANSISTOR_API_KEY = os.getenv('TRANSISTOR_API_KEY')
 TRANSISTOR_SHOW_ID = '12890'
 TRANSISTOR_API_URL = 'https://api.transistor.fm/v1/episodes'
@@ -32,8 +33,9 @@ def create_and_schedule_episode(title, description, audio_path, cover_image_path
         episode_id = episode_data['data']['id']
 
         # Upload audio file
-        with open(audio_path, 'rb') as audio_file:
-            requests.post(f'{TRANSISTOR_API_URL}/{episode_id}/audio', headers=headers, files={'audio': audio_file})
+        # Commented out to disable audio uploading
+        # with open(audio_path, 'rb') as audio_file:
+        #     requests.post(f'{TRANSISTOR_API_URL}/{episode_id}/audio', headers=headers, files={'audio': audio_file})
 
         # Upload cover image
         with open(cover_image_path, 'rb') as image_file:

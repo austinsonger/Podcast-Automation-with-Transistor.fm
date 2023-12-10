@@ -49,20 +49,21 @@ headers = {
 }
 
 # Function to create a draft episode in Transistor
-def create_draft_episode_in_transistor(episode_id, episode_data):
-    endpoint = f"{api_url}/{episode_id}/publish"
+def create_draft_episode_in_transistor(episode_data):
+    endpoint = f"{api_url}/publish"
     response = requests.patch(endpoint, data=episode_data, headers=headers)
     return response
 
 # Main function to process the CSV and create episodes in Transistor
 def process_episodes(csv_file_path):
     episodes = create_draft_episodes_from_csv(csv_file_path, show_id)
-    for episode in episodes:
-        response = create_draft_episode_in_transistor(episode)
+    for episode_data in episodes:
+        response = create_draft_episode_in_transistor(episode_data)
         if response.status_code == 201:
-            print(f"Draft episode '{episode['episode[title]']}' created successfully.")
+            print(f"Draft episode '{episode_data['episode[title]']}' created successfully.")
         else:
-            print(f"Failed to create episode '{episode['episode[title]']}'. Status Code: {response.status_code}, Response: {response.json()}")
+            print(f"Failed to create episode '{episode_data['episode[title]']}'. Status Code: {response.status_code}, Response: {response.json()}")
+
 
 
 process_episodes(csv_file_path)

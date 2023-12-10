@@ -1,11 +1,19 @@
 import pandas as pd
 import os
+from pydub import AudioSegment
 import speech_recognition as sr
 
 def transcribe_audio(file_path):
     recognizer = sr.Recognizer()
     try:
-        with sr.AudioFile(file_path) as source:
+        # Convert MP3 to WAV
+        temp_path = file_path.replace('.mp3', '.wav')
+        if not os.path.exists(temp_path):  # Convert only if .wav file doesn't exist
+            audio = AudioSegment.from_mp3(file_path)
+            audio.export(temp_path, format="wav")
+
+        # Now use the converted WAV file for transcription
+        with sr.AudioFile(temp_path) as source:
             audio_data = recognizer.record(source)
         return recognizer.recognize_google(audio_data)
     except Exception as e:

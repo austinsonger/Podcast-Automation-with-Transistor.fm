@@ -29,7 +29,7 @@ def main():
     for index, row in df.iterrows():
         title = row['Title']  # Assuming the column name is 'Title'
         # Extract case ID using regular expression
-        match = re.search(r'No\. (\d{2}-\d{4})', title)
+        match = re.search(r'No\. (\d+-\d+)', title)
         if match:
             case_id = match.group(1).strip()
             audio_file_path = os.path.join(base_dir, case_id, 'audio', f'{case_id}.mp3')

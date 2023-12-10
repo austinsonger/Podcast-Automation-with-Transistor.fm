@@ -16,19 +16,24 @@ def create_draft_episodes_from_csv(csv_file_path, show_id):
         csv_reader = csv.reader(file)
         next(csv_reader)  # Skip the header row
         for row in csv_reader:
-            if len(row) < 2:  # Ensure the row has at least title and summary
+            if len(row) < 2:
                 continue
             title, summary = row[0], row[1]
 
-            # Extract the argument date from the title using regular expressions
+            # Extract the argument date from the title
             argument_date_match = re.search(r'\[Arg:\s(\d+\.\d+\.\d+)\]', title)
-            argument_date = argument_date_match.group(1) if argument_date_match else None
+            if argument_date_match:
+                argument_date_str = argument_date_match.group(1)
+                argument_date = datetime.strptime(argument_date_str, '%d.%m.%Y')
+                publish_date = argument_date.strftime('%Y-%m-%dT20:00:00Z')  # Format as ISO 8601 with time set to 8:00 PM
+            else:
+                publish_date = None
 
             episode = {
                 "episode[show_id]": show_id,
                 "episode[title]": title.strip(),
                 "episode[summary]": summary.strip(),
-                "episode[publish_at]": argument_date  # Set the argument date as the publish date
+                "episode[publish_at]": publish_date
             }
             episodes.append(episode)
     return episodes

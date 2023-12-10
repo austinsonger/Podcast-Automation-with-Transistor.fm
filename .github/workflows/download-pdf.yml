@@ -1,0 +1,37 @@
+name: Download PDFs and Commit to Repo
+
+on:
+  push:
+    branches:
+      - main  # Adjust the branch name if needed
+
+jobs:
+  download-pdfs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install Dependencies
+      run: |
+        pip install pandas requests
+
+    - name: Download and Commit PDFs
+      run: |
+        python download-pdf-transcription.py  # Replace with the name of your Python script
+        working-directory: src
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name 'Austin Songer'
+        git config --global user.email 'a.songer@protonmail.com'
+        git add . 
+        git commit -m "Downloaded PDFs"
+        git remote set-url origin https://austinsonger:${{ secrets.GH_PAT }}@github.com/austinsonger/Podcast-Automation-with-Transistor.fm.git
+        git push  # Push the commit to the repository

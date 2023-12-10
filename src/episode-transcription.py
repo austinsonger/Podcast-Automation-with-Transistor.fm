@@ -26,11 +26,17 @@ def main():
     df = pd.read_csv(csv_file)
 
     for index, row in df.iterrows():
-        case_id = row['Case ID'].strip()  # Replace 'Case ID' with the actual column name
-        audio_file_path = os.path.join(base_dir, case_id, 'audio', f'{case_id}.mp3')
-        transcription = transcribe_audio(audio_file_path)
-        print(f"Transcription for {audio_file_path}:")
-        print(transcription)
+        title = row['Title']  # Assuming the column name is 'Title'
+        # Extract case ID using regular expression
+        match = re.search(r'No\. (\d{2}-\d{4})', title)
+        if match:
+            case_id = match.group(1).strip()
+            audio_file_path = os.path.join(base_dir, case_id, 'audio', f'{case_id}.mp3')
+            transcription = transcribe_audio(audio_file_path)
+            print(f"Transcription for {audio_file_path}:")
+            print(transcription)
+        else:
+            print(f"No case ID found in title: {title}")
 
 if __name__ == "__main__":
     main()

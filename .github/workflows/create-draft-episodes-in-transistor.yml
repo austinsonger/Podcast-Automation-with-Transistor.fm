@@ -24,5 +24,5 @@ jobs:
       env:
         TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
       run: |
-        python transistorfm-csv.py
+        python draft-scheduling-episodes.py
         working-directory: src

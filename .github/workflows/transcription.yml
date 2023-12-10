@@ -20,6 +20,7 @@ jobs:
       run: |
         pip install pandas
         pip install SpeechRecognition
+        pip install pydub
 
     - name: Run transcription script
       run: python episode-transcription.py

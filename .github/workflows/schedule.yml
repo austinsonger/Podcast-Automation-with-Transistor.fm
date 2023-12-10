@@ -24,8 +24,7 @@ jobs:
 
     - name: Schedule Episodes
       env:
-        TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}    
+        TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
       run: |
         python schedule.py 
-        working-directory: src 
-        
+        working-directory: src       

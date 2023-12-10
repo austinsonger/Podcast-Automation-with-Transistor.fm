@@ -27,15 +27,15 @@ def create_draft_episodes_from_csv(csv_file_path, show_id):
                 argument_date_str = argument_date_match.group(1)
                 # Adjust the date format to match the input format (MM.DD.YYYY)
                 argument_date = datetime.strptime(argument_date_str, '%m.%d.%Y')
-                publish_date = argument_date.strftime('%Y-%m-%dT20:00:00-06:00')   # Format as ISO 8601 with time set to 8:00 PM
+                published_date = argument_date.strftime('%Y-%m-%dT20:00:00') + timezone_offset   # Format as ISO 8601 with time set to 8:00 PM
             else:
-                publish_date = None
+                published_date = None
 
             episode = {
                 "episode[show_id]": show_id,
                 "episode[title]": title.strip(),
                 "episode[summary]": summary.strip(),
-                "episode[publish_at]": publish_date
+                "episode[published_at]": published_date
             }
             episodes.append(episode)
     return episodes
@@ -46,8 +46,9 @@ headers = {
 }
 
 # Function to create a draft episode in Transistor
-def create_draft_episode_in_transistor(episode):
-    response = requests.post(api_url, data=episode, headers=headers)
+def create_draft_episode_in_transistor(episode_id, episode_data):
+    endpoint = f"{api_url}/{episode_id}/publish"
+    response = requests.patch(endpoint, data=episode_data, headers=headers)
     return response
 
 # Main function to process the CSV and create episodes in Transistor

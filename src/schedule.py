@@ -25,7 +25,8 @@ def create_draft_episodes_from_csv(csv_file_path, show_id):
             argument_date_match = re.search(r'\[Arg:\s(\d+\.\d+\.\d+)\]', title)
             if argument_date_match:
                 argument_date_str = argument_date_match.group(1)
-                argument_date = datetime.strptime(argument_date_str, '%d.%m.%Y')
+                # Adjust the date format to match the input format (MM.DD.YYYY)
+                argument_date = datetime.strptime(argument_date_str, '%m.%d.%Y')
                 publish_date = argument_date.strftime('%Y-%m-%dT20:00:00Z')  # Format as ISO 8601 with time set to 8:00 PM
             else:
                 publish_date = None

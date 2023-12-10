@@ -24,7 +24,7 @@ jobs:
           pip install pandas
 
       - name: Run the script
-        run: python download-scotus.py
+        run: python download-scotus-case-audio.py
         working-directory: src
 
       - name: Commit and Push changes

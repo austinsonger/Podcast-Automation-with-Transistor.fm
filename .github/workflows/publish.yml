@@ -1,4 +1,4 @@
-name: Draft/Schedule Episode
+name: Publish Episode
 
 on:
   workflow_dispatch:  
@@ -22,9 +22,9 @@ jobs:
         pip install requests
         pip install pytz
 
-    - name: Schedule Episodes
+    - name: Publish Episodes
       env:
         TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
       working-directory: ./src
       run: |
-        python schedule.py 
+        python episode-update-publish.py 

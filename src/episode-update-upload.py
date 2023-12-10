@@ -12,6 +12,7 @@ TRANSISTOR_API_KEY = os.getenv('TRANSISTOR_API_KEY')
 TRANSISTOR_SHOW_ID = os.getenv('TRANSISTOR_SHOW_ID')
 headers = {"x-api-key": TRANSISTOR_API_KEY, "Content-Type": "application/json"}
 CASE_BASE_PATH = '../2023/'
+IMGUR_CLIENT_ID = os.getenv('IMGUR_CLIENT_ID')
 
 # Dry run flag
 DRY_RUN = True
@@ -27,27 +28,64 @@ def find_first_file_in_directory(directory_path, file_types):
             return files[0]  # Return the first file found
     return None
 
+def authorize_and_upload_audio(episode_id, audio_file_path):
+    # Step 1: Authorize Audio Upload
+    auth_url = f"{TRANSISTOR_API_URL}/{episode_id}/audio_upload"
+    auth_response = requests.post(auth_url, headers=headers)
+    upload_url = auth_response.json().get('data', {}).get('url')
+
+    # Step 2: Upload Audio File
+    with open(audio_file_path, 'rb') as audio_file:
+        upload_response = requests.put(upload_url, data=audio_file)
+
+    if upload_response.status_code != 200:
+        print(f"Error uploading audio file: {upload_response.status_code}")
+        return None
+
+    return upload_url
+
+
+def authorize_and_upload_image(episode_id, image_file_path):
+    """
+    Uploads an image to Imgur and returns the image URL.
+    """
+    headers = {
+        'Authorization': f'Client-ID {IMGUR_CLIENT_ID}'
+    }
+
+    with open(image_file_path, 'rb') as image:
+        data = {
+            'image': image.read(),
+            'type': 'file'
+        }
+
+        response = requests.post('https://api.imgur.com/3/upload', headers=headers, files=data)
+        if response.status_code == 200:
+            return response.json()['data']['link']
+        else:
+            print(f"Error uploading image: {response.status_code}")
+            return None
+
+
+
+
 def update_episode(episode_id, case_id, data):
     """
     Updates an episode in Transistor.fm with the given data, audio, and image.
     """
-    url = f"{TRANSISTOR_API_URL}/{episode_id}"
-
-    # Find the audio and image files
     audio_file = find_first_file_in_directory(os.path.join(CASE_BASE_PATH, case_id, 'audio'), ['mp3', 'wav'])
     image_file = find_first_file_in_directory(os.path.join(CASE_BASE_PATH, case_id, 'images'), ['jpg', 'jpeg', 'png'])
 
-    files = {}
-    if audio_file:
-        files['audio'] = (os.path.basename(audio_file), open(audio_file, 'rb'), mimetypes.guess_type(audio_file)[0])
-    if image_file:
-        files['image'] = (os.path.basename(image_file), open(image_file, 'rb'), mimetypes.guess_type(image_file)[0])
+    audio_url = authorize_and_upload_audio(episode_id, audio_file) if audio_file else None
+    image_url = authorize_and_upload_image(episode_id, image_file) if image_file else None  
 
     payload = {
         "episode": {
             "show_id": TRANSISTOR_SHOW_ID,
             "title": data['title'],
-            "description": data['summary']
+            "description": data['summary'],
+            "audio_url": audio_url,  # Update the audio URL
+            "image_url": image_url   # Update the image URL
         }
     }
 

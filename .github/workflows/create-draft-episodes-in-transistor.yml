@@ -25,5 +25,5 @@ jobs:
     - name: Run Script
       env:
         TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
-      run: python draft-scheduling-episodes.py
+      run: python episode-update-upload.py
       working-directory: src

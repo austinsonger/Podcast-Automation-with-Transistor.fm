@@ -18,11 +18,12 @@ jobs:
 
     - name: Install dependencies
       run: |
+        pip install pandas
         pip install requests
+        pip install pytz
 
     - name: Run Script
       env:
         TRANSISTOR_API_KEY: ${{ secrets.TRANSISTOR_API_KEY }}
-      run: |
-        python draft-scheduling-episodes.py
-        working-directory: src
+      run: python draft-scheduling-episodes.py
+      working-directory: src

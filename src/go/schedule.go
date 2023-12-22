@@ -14,10 +14,11 @@ import (
 
 const (
     apiURL           = "https://api.transistor.fm/v1/episodes"
-    transistorAPIKey = "your-transistor-api-key" // 
     showID           = "12890"
     csvFilePath      = "./config/scotus.csv"
 )
+
+var TRANSISTOR_API_KEY = os.Getenv("TRANSISTOR_API_KEY")
 
 type Episode struct {
     Title    string
@@ -70,7 +71,7 @@ func createDraftEpisodeInTransistor(episode Episode) (string, error) {
     if err != nil {
         return "", err
     }
-    req.Header.Set("x-api-key", transistorAPIKey)
+    req.Header.Set("x-api-key", TRANSISTOR_API_KEY)
     req.Header.Set("Content-Type", "application/json")
 
     client := &http.Client{}
@@ -109,7 +110,7 @@ func updateEpisodePublishDate(episodeID, publishedDate string) error {
     if err != nil {
         return err
     }
-    req.Header.Set("x-api-key", transistorAPIKey)
+    req.Header.Set("x-api-key", TRANSISTOR_API_KEY)
     req.Header.Set("Content-Type", "application/json")
 
     client := &http.Client{}

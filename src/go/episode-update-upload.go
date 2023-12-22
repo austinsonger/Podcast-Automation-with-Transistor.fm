@@ -14,10 +14,24 @@ import (
 )
 
 const (
-	transistorAPIURL = "https://api.transistor.fm/v1/episodes"
-	imgurAPIURL      = "https://api.imgur.com/3/upload"
-	dryRun           = true
+	dryRun = true
 )
+
+type Config struct {
+	CSVFilePath      string
+	TransistorAPIURL string
+	TransistorAPIKey string
+	imgurAPIURL      string
+}
+
+func LoadConfig() Config {
+	return Config{
+		CSVFilePath:      "./config/scotus.csv",
+		TransistorAPIURL: "https://api.transistor.fm/v1/episodes",
+		TransistorAPIKey: os.Getenv("TRANSISTOR_API_KEY"),
+		imgurAPIURL:      "https://api.imgur.com/3/upload",
+	}
+}
 
 type EpisodeData struct {
 	Title    string `json:"title"`
@@ -245,7 +259,7 @@ func main() {
 		return
 	}
 
-	if err := processCSV(config.CSVFilePath, config); err != nil {
+	if err := processCSV(config.CSVFilePath, config.TransistorAPIURL, config.TransistorAPIKey); err != nil {
 		fmt.Println("Error processing CSV file:", err)
 	}
 }

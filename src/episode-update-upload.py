@@ -11,7 +11,7 @@ TRANSISTOR_API_URL = "https://api.transistor.fm/v1/episodes"
 TRANSISTOR_API_KEY = os.getenv('TRANSISTOR_API_KEY')
 TRANSISTOR_SHOW_ID = os.getenv('TRANSISTOR_SHOW_ID')
 headers = {"x-api-key": TRANSISTOR_API_KEY, "Content-Type": "application/json"}
-CASE_BASE_PATH = '../2023/'
+CASE_BASE_PATH = './2023/'
 IMGUR_CLIENT_ID = os.getenv('IMGUR_CLIENT_ID')
 
 # Dry run flag

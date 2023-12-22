@@ -16,7 +16,7 @@ import (
 const (
     transistorAPIURL = "https://api.transistor.fm/v1/episodes"
     imgurAPIURL      = "https://api.imgur.com/3/upload"
-    caseBasePath     = "../2023/"
+    caseBasePath     = ".../2023/"
     dryRun           = true
 )
 

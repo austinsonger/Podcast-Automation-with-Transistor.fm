@@ -11,16 +11,16 @@ import (
 )
 
 type Config struct {
-    CSVFilePath       string
-    TransistorAPIURL  string
-    TransistorAPIKey  string
+    CSVFilePath      string
+    TransistorAPIURL string
+    TransistorAPIKey string
 }
 
 func LoadConfig() Config {
     return Config{
-        CSVFilePath:       "./config/scotus.csv",
-        TransistorAPIURL:  "https://api.transistor.fm/v1/episodes",
-        TransistorAPIKey:  os.Getenv("TRANSISTOR_API_KEY"),
+        CSVFilePath:      "./config/go/scotus.csv",
+        TransistorAPIURL: "https://api.transistor.fm/v1/episodes",
+        TransistorAPIKey: os.Getenv("TRANSISTOR_API_KEY"),
     }
 }
 
@@ -40,6 +40,10 @@ func publishEpisode(episodeID, apiURL, apiKey string) (json.RawMessage, error) {
         return nil, err
     }
     defer resp.Body.Close()
+
+    if resp.StatusCode != http.StatusOK {
+        return nil, fmt.Errorf("failed to publish episode: %s", resp.Status)
+    }
 
     var response json.RawMessage
     err = json.NewDecoder(resp.Body).Decode(&response)

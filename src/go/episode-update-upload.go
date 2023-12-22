@@ -40,13 +40,6 @@ type EpisodeData struct {
 	ImageURL string `json:"image_url,omitempty"`
 }
 
-type Config struct {
-	TransistorAPIKey string `json:"transistor_api_key"`
-	ImgurClientID    string `json:"imgur_client_id"`
-	CaseBasePath     string `json:"case_base_path"`
-	CSVFilePath      string `json:"csv_file_path"`
-}
-
 func loadConfig() (Config, error) {
 	file, err := os.Open("./config/config.json")
 	if err != nil {
@@ -78,7 +71,7 @@ func findFirstFileInDirectory(directoryPath string, fileTypes []string) (string,
 
 func authorizeAndUploadAudio(episodeID, audioFilePath string, config Config) (string, error) {
 	// Step 1: Authorize Audio Upload
-	authURL := fmt.Sprintf("%s/%s/audio_upload", transistorAPIURL, episodeID)
+	authURL := fmt.Sprintf("%s/%s/audio_upload", config.TransistorAPIURL, episodeID)
 	req, err := http.NewRequest("POST", authURL, nil)
 	if err != nil {
 		return "", err
@@ -141,7 +134,7 @@ func authorizeAndUploadImage(episodeID, imageFilePath string, config Config) (st
 	writer.Close()
 
 	// Step 2: Upload Image
-	req, err := http.NewRequest("POST", imgurAPIURL, body)
+	req, err := http.NewRequest("POST", config.imgurAPIURL, body)
 	if err != nil {
 		return "", err
 	}
@@ -176,7 +169,7 @@ func updateEpisode(episodeID, caseID string, data EpisodeData, config Config) (j
 		return nil, err
 	}
 
-	updateURL := fmt.Sprintf("%s/%s", transistorAPIURL, episodeID)
+	updateURL := fmt.Sprintf("%s/%s", config.TransistorAPIURL, episodeID)
 	req, err := http.NewRequest("PATCH", updateURL, bytes.NewBuffer(payload))
 	if err != nil {
 		return nil, err
@@ -259,7 +252,7 @@ func main() {
 		return
 	}
 
-	if err := processCSV(config.CSVFilePath, config.TransistorAPIURL, config.TransistorAPIKey); err != nil {
+	if err := processCSV(config.CSVFilePath, config); err != nil {
 		fmt.Println("Error processing CSV file:", err)
 	}
 }

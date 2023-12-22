@@ -10,6 +10,20 @@ import (
     "time"
 )
 
+type Config struct {
+    CSVFilePath       string
+    TransistorAPIURL  string
+    TransistorAPIKey  string
+}
+
+func LoadConfig() Config {
+    return Config{
+        CSVFilePath:       "./config/scotus.csv",
+        TransistorAPIURL:  "https://api.transistor.fm/v1/episodes",
+        TransistorAPIKey:  os.Getenv("TRANSISTOR_API_KEY"),
+    }
+}
+
 func publishEpisode(episodeID, apiURL, apiKey string) (json.RawMessage, error) {
     url := fmt.Sprintf("%s/%s/publish", apiURL, episodeID)
 
@@ -65,11 +79,9 @@ func processCSV(csvPath, apiURL, apiKey string) error {
 }
 
 func main() {
-    csvFilePath := "./config/scotus.csv"
-    transistorAPIURL := "https://api.transistor.fm/v1/episodes"
-    transistorAPIKey := os.Getenv("TRANSISTOR_API_KEY")
+    config := LoadConfig()
 
-    if err := processCSV(csvFilePath, transistorAPIURL, transistorAPIKey); err != nil {
+    if err := processCSV(config.CSVFilePath, config.TransistorAPIURL, config.TransistorAPIKey); err != nil {
         fmt.Println("Error processing CSV file:", err)
     }
 }

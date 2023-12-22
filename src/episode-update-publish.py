@@ -21,6 +21,12 @@ def publish_episode(episode_id):
 def process_csv(csv_path):
     """
     Process the CSV file and publish episodes if the argument date has passed and they are not published.
+
+    Args:
+        csv_path (str): The path to the CSV file.
+
+    Returns:
+        None
     """
     with open(csv_path, mode='r', encoding='utf-8') as file:
         reader = csv.DictReader(file)

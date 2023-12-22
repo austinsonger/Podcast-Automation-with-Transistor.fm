@@ -21,6 +21,19 @@ def transcribe_audio(file_path):
         return f"Error transcribing file {file_path}: {e}"
 
 def main():
+    """
+    Transcribes audio files based on the information provided in a CSV file.
+
+    Reads a CSV file containing episode titles and extracts the case ID from each title using regular expressions.
+    It then generates the file path for the corresponding audio file and transcribes the audio using the
+    transcribe_audio function. The transcription is printed to the console.
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     csv_file = './config/scotus.csv'  # Replace with your CSV file path
     base_dir = '../2023/'  # Adjust based on the download-scotus.py script
 

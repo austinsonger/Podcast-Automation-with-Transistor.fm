@@ -5,6 +5,20 @@ import os
 import textwrap
 from PIL import Image, ImageDraw, ImageFont
 
+"""
+    Generate cover images for each episode based on the data in a CSV file.
+
+    Args:
+        csv_file (str): Path to the CSV file containing episode data.
+        base_dir (str): Base directory for the year.
+        graphic_path (str): Path to the predefined graphic.
+        font_path (str): Path to the font file.
+        font_size (int): Font size for the text on the cover image.
+
+    Returns:
+        None
+"""
+
 # Load CSV file
 csv_file = './config/scotus.csv'
 data = pd.read_csv(csv_file)
@@ -58,3 +72,7 @@ for index, row in data.iterrows():
 
         # Save the new image in the created directory
         img.save(new_image_path)
+
+
+
+

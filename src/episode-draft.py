@@ -29,6 +29,9 @@ def process_csv(csv_path):
     """
     Processes each row in the CSV file and creates a draft episode.
     Then updates the CSV with the episode ID.
+
+    :param csv_path: The path to the CSV file.
+    :type csv_path: str
     """
     rows = []
     with open(csv_path, mode='r', encoding='utf-8') as file:

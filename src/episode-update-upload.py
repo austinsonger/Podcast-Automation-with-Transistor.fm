@@ -72,6 +72,14 @@ def authorize_and_upload_image(episode_id, image_file_path):
 def update_episode(episode_id, case_id, data):
     """
     Updates an episode in Transistor.fm with the given data, audio, and image.
+
+    Parameters:
+    - episode_id (str): The ID of the episode to be updated.
+    - case_id (str): The ID of the case associated with the episode.
+    - data (dict): A dictionary containing the updated episode data, including title and summary.
+
+    Returns:
+    - dict: The JSON response from the Transistor.fm API after updating the episode.
     """
     audio_file = find_first_file_in_directory(os.path.join(CASE_BASE_PATH, case_id, 'audio'), ['mp3', 'wav'])
     image_file = find_first_file_in_directory(os.path.join(CASE_BASE_PATH, case_id, 'images'), ['jpg', 'jpeg', 'png'])
@@ -103,7 +111,7 @@ def update_episode(episode_id, case_id, data):
         print(f"Error updating episode: {response.status_code}")
         print(f"Response: {response.text}")  # More detailed logging
 
-    return response.json()   
+    return response.json()
 
 
 def process_csv(csv_path):

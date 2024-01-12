@@ -24,7 +24,7 @@ csv_file = './config/scotus.csv'
 data = pd.read_csv(csv_file)
 
 # Base directory for the year
-base_dir = './2023/'
+base_dir = './2024/'
 
 # Path to your predefined graphic
 graphic_path = './config/Blank.png'

@@ -20,6 +20,7 @@ You can find the podcast that this automation is for at the following: [Apple Po
 - [X] Make it so when podcast-covers.yml runs, it also commit changes to the repo.
 - [X] Make it so when download-scotus.yml runs, it also commit changes to the repo.
 - [ ] Refractoring the program to be in Rust language.
+- [ ] Read from https://www.scotusblog.com and updates scotus.csv file with confirm cases
 
 
 ## Supreme Court of the United States Podcast Episode Generator

@@ -19,7 +19,7 @@ def download_scotus_case_audio():
         None
     """
     # Load the CSV file
-    file_path = 'scotus.csv'  # Adjust path as needed
+    file_path = './config/scotus.csv' # Adjust path as needed
     scotus_df = pd.read_csv(file_path)
 
     # Iterate over each row to process the case

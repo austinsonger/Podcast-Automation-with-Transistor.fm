@@ -25,7 +25,7 @@ def download_scotus_case_audio():
         return
 
     # Base directory for the year
-    base_dir = './2024/'
+    base_dir = './2024/FEBRUARY/'
 
     for index, row in scotus_df.iterrows():
         try:

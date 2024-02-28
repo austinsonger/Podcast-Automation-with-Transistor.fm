@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import textwrap
 from PIL import Image, ImageDraw, ImageFont
+from datetime import datetime
 
 """
     Generate cover images for each episode based on the data in a CSV file.

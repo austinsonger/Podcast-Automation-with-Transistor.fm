@@ -8,7 +8,7 @@ def download_scotus_case_audio():
     Downloads audio files for Supreme Court cases from the given CSV file.
     
     The function reads a CSV file containing case details and iterates over each row.
-    For each case, it parses the argument date to create a directory by year and month,
+    For each case, it parses the argument date to create a directory by year, month, and case ID,
     then downloads the corresponding audio file into this directory using curl command.
     If the file already exists, it skips downloading.
     
@@ -33,8 +33,8 @@ def download_scotus_case_audio():
         year = parsed_date.strftime("%Y")
         month = parsed_date.strftime("%B").upper()
 
-        # Base directory for the case
-        base_dir = os.path.join(f'./{year}/{month}/audio/')
+        # Modify base directory to include case_id in the path
+        base_dir = os.path.join(f'./{year}/{month}/{case_id}/audio/')
 
         # Ensure the directory exists
         os.makedirs(base_dir, exist_ok=True)

@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas pillow  # Install the required Python packages
+          pip install pandas pillow requests # Install the required Python packages
 
       - name: Run the script
         run: python episode-update-upload.py  # Run the script

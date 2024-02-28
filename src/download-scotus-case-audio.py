@@ -34,7 +34,7 @@ def download_scotus_case_audio():
         month = parsed_date.strftime("%B").upper()
 
         # Base directory for the case
-        base_dir = os.path.join(f'./{year}/{month}/')
+        base_dir = os.path.join(f'./{year}/{month}/audio/')
 
         # Ensure the directory exists
         os.makedirs(base_dir, exist_ok=True)

@@ -22,9 +22,9 @@ jobs:
         run: |
           pip install pandas pillow requests # Install the required Python packages
 
-      - name: Run the script
-        run: python episode-update-upload.py  # Run the script
-        working-directory: src
+      # - name: Run the script
+      # run: python episode-update-upload.py  # Run the script
+      #  working-directory: src
 
       - name: Commit and Push changes
         run: |

@@ -29,18 +29,18 @@ def download_scotus_case_audio():
         argument_date = row['Argument Date']
 
         # Parse the argument date and format it for directory naming
-        parsed_date = datetime.strptime(argument_date, "%m-%d-%Y")
+        parsed_date = datetime.strptime(argument_date, "%m/%d/%y")
         year = parsed_date.strftime("%Y")
-        month = parsed_date.strftime("%B").upper()
+        month = parsed_date.strftime("%B").upper()        
 
-        # Modify base directory to include case_id in the path
-        base_dir = os.path.join(f'./{year}/{month}/{case_id}/audio/')
+        # Full path for the case directory including year, month, and case ID
+        case_dir = os.path.join(f'./{year}/{month}/{case_id}/audio/')
 
         # Ensure the directory exists
-        os.makedirs(base_dir, exist_ok=True)
+        os.makedirs(case_dir, exist_ok=True)
 
         # Full path for the audio file
-        audio_file_path = os.path.join(base_dir, f"{case_id}.mp3")
+        audio_file_path = os.path.join(case_dir, f"{case_id}.mp3")
 
         # Generate the curl command
         curl_command = f"curl https://www.supremecourt.gov/media/audio/mp3files/{case_id}.mp3 --output {audio_file_path}"

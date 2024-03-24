@@ -39,7 +39,7 @@ def generate_cover_images():
         argument_date = row['Argument Date']
 
         # Parse the argument date to determine year and month
-        parsed_date = datetime.strptime(argument_date, "%m/%d/%Y")
+        parsed_date = datetime.strptime(argument_date, "%m/%d/%y")
         year = parsed_date.strftime("%Y")
         month = parsed_date.strftime("%B").upper()
 

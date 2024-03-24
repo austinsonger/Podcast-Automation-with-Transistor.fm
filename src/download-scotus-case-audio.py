@@ -52,7 +52,7 @@ def download_scotus_case_audio():
         audio_file_path = os.path.join(case_dir, f"{case_id}.mp3")
 
         # Generate the curl command
-        curl_command = f"curl https://www.supremecourt.gov/media/audio/mp3files/{case_id}.mp3 --output {audio_file_path}"
+        curl_command = f"curl -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3' https://www.supremecourt.gov/media/audio/mp3files/{case_id}.mp3 --output {audio_file_path}"
 
         # Check if the file already exists
         if not os.path.exists(audio_file_path):

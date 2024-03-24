@@ -22,6 +22,9 @@ def download_scotus_case_audio():
     file_path = './config/scotus.csv' # Adjust path as needed
     scotus_df = pd.read_csv(file_path)
 
+    # Get the current date
+    current_date = datetime.now()
+
     # Iterate over each row to process the case
     for index, row in scotus_df.iterrows():
         # Extract case ID and argument date
@@ -30,6 +33,12 @@ def download_scotus_case_audio():
 
         # Parse the argument date and format it for directory naming
         parsed_date = datetime.strptime(argument_date, "%m/%d/%y")
+
+        # Skip downloading if the argument date is in the future
+        if parsed_date > current_date:
+            print(f"Skipping {case_id}: Argument date is in the future.")
+            continue              
+        
         year = parsed_date.strftime("%Y")
         month = parsed_date.strftime("%B").upper()        
 

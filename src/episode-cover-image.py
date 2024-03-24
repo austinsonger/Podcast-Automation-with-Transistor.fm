@@ -29,7 +29,7 @@ def generate_cover_images():
     graphic_path = './config/Blank.png'
 
     # Font settings
-    font_path = './config/FontFile.ttf'  # Update with the actual path to your font
+    font_path = './config/MonaspaceArgon-Bold.otf'  # Update with the actual path to your font
     font_size = 100
     font = ImageFont.truetype(font_path, font_size)
 

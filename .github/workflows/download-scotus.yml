@@ -2,6 +2,8 @@ name: Download New Audio from Recent Arguments
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *'  # Runs at 11:00 PM UTC, which is 5:00 PM CST without daylight saving time adjustments
 
 
 jobs:
